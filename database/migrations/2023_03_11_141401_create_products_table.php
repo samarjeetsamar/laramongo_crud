@@ -13,13 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::connection('mongodb')->create('users', function (Blueprint $collection) {
+        Schema::connection('mongodb')->create('products', function (Blueprint $collection) {
             $collection->id();
             $collection->string('name');
-            $collection->string('email')->unique();
-            $collection->timestamp('email_verified_at')->nullable();
-            $collection->string('password');
-            $collection->rememberToken();
+            $collection->text('detail');
             $collection->timestamps();
         });
     }
@@ -31,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::connection('mongodb')->dropIfExists('users');
+        Schema::connection('mongodb')->dropIfExists('products');
     }
 };
