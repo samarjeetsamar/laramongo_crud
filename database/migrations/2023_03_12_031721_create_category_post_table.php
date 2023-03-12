@@ -13,13 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::connection('mongodb')->create('posts', function (Blueprint $collection) {
+        Schema::connection('mongodb')->create('category_post', function (Blueprint $collection) {
             $collection->id();
-            $collection->string('title');
-            $collection->string('slug')->unique();
-            $collection->text('content');
-            $collection->string('image');
-            $collection->foreignId('user_id')->constrained('users');
+            $collection->foreignId('category_id');
+            $collection->foreignId('post_id');
+            $collection->index('category_id');
+            $collection->index('post_id');
             $collection->timestamps();
         });
     }
@@ -31,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::connection('mongodb')->dropIfExists('posts');
+        Schema::connection('mongodb')->dropIfExists('category_post');
     }
 };

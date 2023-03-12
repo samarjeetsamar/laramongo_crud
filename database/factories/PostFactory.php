@@ -23,17 +23,14 @@ class PostFactory extends Factory
     public function definition()
     {
         //$category_id = Category::inRandomOrder()->first()->_id;
-        $category_id = DB::collection('categories')->inRandomOrder()->first()->_id;
-        echo $category_id;
-        die;
+        $userIds = DB::collection('users')->pluck('_id');
         $title = $this->faker->sentence;
         return [
             'title' => $title,
             'slug' => Str::slug($title),
             'content' => $this->faker->paragraph(3, true),
             'image' => $this->faker->imageURL(),
-            'user_id' => User::factory(),
-            'category_id' => $category_id,
+            'user_id' => $userIds->random(),
         ];
     }
 }

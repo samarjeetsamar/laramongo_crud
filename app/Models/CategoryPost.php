@@ -6,17 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 
-class Category extends Eloquent
+class CategoryPost extends Eloquent
 {
     use HasFactory;
-
     protected $connection = 'mongodb';
-    protected $collection = 'categories';
-
-    protected $fillable = ['name'];
-
-    public function posts()
-    {
-        return $this->belongsToMany(Post::class);
-    }
+    protected $collection = 'category_post';
+    protected $fillable = ['category_id', 'post_id'];
+    
 }
